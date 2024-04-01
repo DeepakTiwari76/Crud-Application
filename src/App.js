@@ -1,6 +1,6 @@
 import { Employedata } from './EmployeData';
 import './App.css';
-import react,  {useEffect,useState} from 'react'
+import {useEffect,useState} from 'react'
 
 function App() {
 const[data, setdata] = useState([]);
@@ -42,17 +42,19 @@ const performclear =()=>{
   setisupdate(false) 
 }
 const performsave =(e)=>{
-  // let error ='';
-  // if(firstName ==='' )
-  //   error +='first name is required ,' ;
-  
-  // if(lastName ==='')
-  //   error +='last name is required ,';
-  
-  // if(age<=0)
-  //   error +='age is required ,';
-  
-  
+ let error = '';
+
+ if(firstName === '')
+ error += 'firstname is required ,'
+
+ if(lastName === '')
+ error += 'lastname is required , '
+
+ if(age<= 0);
+ error += 'age is required'
+
+if(error === '')
+{
   e.preventDefault();
   const dt = [...data];
   const newobject= {
@@ -63,7 +65,11 @@ const performsave =(e)=>{
   }
   dt.push(newobject);
   setdata(dt);
-
+  performclear();
+}
+else{
+  alert(error)
+}
 }
 const handleupdate =()=>{
   const index = data.map((item)=>{
@@ -87,7 +93,7 @@ useEffect(()=>{
     <div className="App">
       <div className='input'>
         <label for="text" >First Name:</label>
-        <input type='text' value={firstName} onChange={(e)=>setfirstName(e.target.value)} placeholder='Enter name'></input>
+        <input type='text' value={firstName}  onChange={(e)=>setfirstName(e.target.value)} placeholder='Enter name'></input>
         <label for="text" >LastName:</label>
         <input type='text' value={lastName} onChange={(e)=>setlastName(e.target.value)} placeholder='Enter name'></input>
         <label  >age:</label>
